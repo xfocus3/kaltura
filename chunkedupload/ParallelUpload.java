@@ -239,7 +239,7 @@ public class ParallelUpload {
      */
     private boolean addChunk(ChunkedStream stream, boolean resume, boolean finalChunk, long resumeAt) throws IOException {
         try {
-            client.getUploadTokenService().upload(upToken.id, stream, "a.dat", stream.getSize(), resume, finalChunk, resumeAt);
+            client.getUploadTokenService().upload(upToken.id, stream, "a.mkv", stream.getSize(), resume, finalChunk, resumeAt);
 		return true;
         } catch (KalturaApiException e) {
             e.printStackTrace();
