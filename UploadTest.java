@@ -1,4 +1,3 @@
-
 import com.kaltura.client.enums.*;
 import com.kaltura.client.types.*;
 import com.kaltura.client.services.*;
@@ -6,22 +5,20 @@ import com.kaltura.client.KalturaApiException;
 import com.kaltura.client.KalturaClient;
 import com.kaltura.client.KalturaConfiguration;
 import chunkedupload.ParallelUpload;
+import java.io.File;
+
 
 public class UploadTest { 
 	public static void main(String[] argv){
-		try{
-			if (argv.length < 4){
-				System.out.println("Usage: <service URL> <partner ID> <partner admin secret> </path/to/file> [optional entryId to update]\n");
-				System.exit (1);
-			}
+		
 			try{
 				KalturaConfiguration config = new KalturaConfiguration();
-				config.setEndpoint(argv[0]);
+				config.setEndpoint("https://www.kaltura.com");
 				KalturaClient client = new KalturaClient(config);
 
-				String secret = argv[2];
+				String secret = "b2a56dea9865f22c7007da573011f306";
 				String userId = null;
-				int partnerId = Integer.parseInt(argv[1]);
+				int partnerId = Integer.parseInt("2725931");
 				String privileges = null;
 				KalturaSessionService sessionService = client.getSessionService();
 				String ks = client.generateSessionV2(secret, null, KalturaSessionType.ADMIN, partnerId, 86400, "");
@@ -31,20 +28,21 @@ public class UploadTest {
 
 				KalturaMediaEntry newEntry = null;
 				boolean update = false;
-				if(argv.length > 4 && argv[4] != "") {
-					newEntry = client.getMediaService().get(argv[4]);
-					update = true;
-				} else {
+
+				final File file = new File(argv[0]);
+			for(final File child : file.listFiles()) {
+				if(child.isDirectory())
+					continue;
+			try{
 					KalturaMediaEntry entry = new KalturaMediaEntry();
-					entry.name = "Chunked Upload Test";
+					entry.name = child.getName().replaceFirst("[.][^.]+$", "");
 					entry.type = KalturaEntryType.MEDIA_CLIP;
 					entry.mediaType = KalturaMediaType.VIDEO;
 					newEntry = client.getMediaService().add(entry);
-				}
 
 				System.out.println("\nCreated a new entry: " + newEntry.id);
-			
-				ParallelUpload pu = new ParallelUpload(client, argv[3]);	
+				
+				ParallelUpload pu = new ParallelUpload(client, child.getCanonicalPath());	
 				String tokenId = pu.upload();
 				if (tokenId != null) {
 					KalturaUploadedFileTokenResource fileTokenResource = new KalturaUploadedFileTokenResource();
@@ -59,8 +57,11 @@ public class UploadTest {
 			} catch (KalturaApiException e) {
 			            e.printStackTrace();
 			}
-		} catch (Exception exc) {
+
+			}
+
+}catch (Exception exc) {
         	exc.printStackTrace();
     	}
-	}
+    }
 }
