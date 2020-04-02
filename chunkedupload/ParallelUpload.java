@@ -157,7 +157,7 @@ public class ParallelUpload {
 	private int retryCount = 0;
 
 	public int chunkSize = 10*1024*1024;
-	public int threadCount = 20;
+	public int threadCount = 10;
 	public int maxChunkRetries = 3;
 	public int maxRetries = 5;
 
@@ -239,7 +239,7 @@ public class ParallelUpload {
      */
     private boolean addChunk(ChunkedStream stream, boolean resume, boolean finalChunk, long resumeAt) throws IOException {
         try {
-            client.getUploadTokenService().upload(upToken.id, stream, "a.mkv", stream.getSize(), resume, finalChunk, resumeAt);
+            client.getUploadTokenService().upload(upToken.id, stream, "a.dat", stream.getSize(), resume, finalChunk, resumeAt);
 		return true;
         } catch (KalturaApiException e) {
             e.printStackTrace();
