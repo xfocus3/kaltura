@@ -31,11 +31,14 @@ public class UploadTest {
 
 				final File file = new File(argv[0]);
 			for(final File child : file.listFiles()) {
+				System.out.println("File Name"+child.getName());
 				if(child.isDirectory())
 					continue;
 			try{
 					KalturaMediaEntry entry = new KalturaMediaEntry();
 					entry.name = child.getName().replaceFirst("[.][^.]+$", "");
+								System.out.println("entry.name Name"+entry.name);
+
 					entry.type = KalturaEntryType.MEDIA_CLIP;
 					entry.mediaType = KalturaMediaType.VIDEO;
 					newEntry = client.getMediaService().add(entry);
