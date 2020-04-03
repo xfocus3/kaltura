@@ -9,7 +9,7 @@ if [ -n "$5" ];then
 fi
 
 #compile
-javac -cp .:KalturaClient-3.3.1.jar:httpclient-4.2.3.jar:commons-httpclient-3.1.jar:log4j-1.2.15.jar:json-20090211.jar UploadTest.java
+javac -cp .:commons-codec-1.6.jar:commons-logging-1.1.1.jar:gson-2.8.6.jar:httpclient-4.2.3.jar:json-20090211.jar:KalturaClient-3.3.1.jar:kotlin-stdlib-1.2.60.jar:kotlin-stdlib-common-1.2.60.jar:log4j-api-2.13.1.jar:log4j-core-2.13.1.jar:mockwebserver-4.4.1.jar:okhttp-4.4.1.jar:okio-2.0.0.jar UploadTest.java
 
 #run
-java -cp .:KalturaClient-3.3.1.jar:httpclient-4.2.3.jar:commons-httpclient-3.1.jar:log4j-1.2.15.jar:json-20090211.jar:commons-codec-1.6.jar:commons-logging-1.1.1.jar UploadTest $SERVICE_URL $PARTNER_ID $ADMIN_SECRET $PATH_TO_FILE $ENTRY_ID_TO_UPDATE 
+java -cp .:commons-codec-1.6.jar:commons-logging-1.1.1.jar:gson-2.8.6.jar:httpclient-4.2.3.jar:json-20090211.jar:KalturaClient-3.3.1.jar:kotlin-stdlib-1.2.60.jar:kotlin-stdlib-common-1.2.60.jar:log4j-api-2.13.1.jar:log4j-core-2.13.1.jar:mockwebserver-4.4.1.jar:okhttp-4.4.1.jar:okio-2.0.0.jar UploadTest $PATH_TO_FOLDER
