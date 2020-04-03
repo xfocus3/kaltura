@@ -1,0 +1,32 @@
+2020-04-03 21:05:18.599: debug - request [846894f2-01d4-45ec-a1de-1fcdfc063923::media.upload] url: https://www.kaltura.com/api_v3/service/media/action/upload
+body:
+{"ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXyntofIIQJJ6iHjaqdhdoEpIZoAjoAgUwuiLKVQaVtdC46u4PMOZiI67Lk63tM7eYG_hJG_dBl0PecpghFuTWGY"}
+
+
+2020-04-03 21:05:20.138: debug - response [846894f2-01d4-45ec-a1de-1fcdfc063923::media.upload] body:
+"2725931bd2773b60c745f684bdc192ecd3d0b87_2km03n1wg00w8og0gcw8.DS_Store"
+
+2020-04-03 21:05:20.147: debug - request [fc1c50a7-1796-4e82-a6b6-bef46f3f3ce8::media.addFromUploadedFile] url: https://www.kaltura.com/api_v3/service/media/action/addFromUploadedFile
+body:
+{"mediaEntry":{"objectType":"KalturaMediaEntry","name":".DS_Store","type":"1","mediaType":1},"uploadTokenId":"2725931bd2773b60c745f684bdc192ecd3d0b87_2km03n1wg00w8og0gcw8.DS_Store","ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXyntofIIQJJ6iHjaqdhdoEpIZoAjoAgUwuiLKVQaVtdC46u4PMOZiI67Lk63tM7eYG_hJG_dBl0PecpghFuTWGY"}
+
+
+2020-04-03 21:05:20.783: debug - response [fc1c50a7-1796-4e82-a6b6-bef46f3f3ce8::media.addFromUploadedFile] body:
+{"mediaType":1,"conversionQuality":11638381,"sourceType":"1","dataUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_sujc1xlh\/format\/url\/protocol\/https","plays":0,"views":0,"duration":0,"msDuration":0,"id":"1_sujc1xlh","name":".DS_Store","partnerId":2725931,"status":1,"moderationStatus":6,"moderationCount":0,"type":1,"createdAt":1585944320,"updatedAt":1585944320,"rank":0,"totalRank":0,"votes":0,"downloadUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_sujc1xlh\/format\/download\/protocol\/https\/flavorParamIds\/0","searchText":"_PAR_ONLY_ _2725931_ _MEDIA_TYPE_1|  .DS_Store ","licenseType":-1,"version":0,"thumbnailUrl":"https:\/\/cfvod.kaltura.com\/p\/2725931\/sp\/272593100\/thumbnail\/entry_id\/1_sujc1xlh\/version\/0","accessControlId":2965121,"replacementStatus":0,"partnerSortValue":0,"conversionProfileId":11638381,"rootEntryId":"1_sujc1xlh","operationAttributes":[],"entitledUsersEdit":"","entitledUsersPublish":"","entitledUsersView":"","capabilities":"","displayInSearch":1,"objectType":"KalturaMediaEntry"}
+
+2020-04-03 21:05:20.810: debug - request [3fef34f7-da64-42f0-b6cd-53d4477c2041::media.upload] url: https://www.kaltura.com/api_v3/service/media/action/upload
+body:
+{"ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXyntofIIQJJ6iHjaqdhdoEpIZoAjoAgUwuiLKVQaVtdC46u4PMOZiI67Lk63tM7eYG_hJG_dBl0PecpghFuTWGY"}
+
+
+2020-04-03 21:06:07.231: debug - response [3fef34f7-da64-42f0-b6cd-53d4477c2041::media.upload] body:
+"2725931bd2773b60c745f684bdc192ecd3d0b87_ci2gqbtyr4sg4owock8k.mp4"
+
+2020-04-03 21:06:07.233: debug - request [45b6eab7-9287-4f6b-97c5-64002c207d8f::media.addFromUploadedFile] url: https://www.kaltura.com/api_v3/service/media/action/addFromUploadedFile
+body:
+{"mediaEntry":{"objectType":"KalturaMediaEntry","name":"video.mp4","type":"1","mediaType":1},"uploadTokenId":"2725931bd2773b60c745f684bdc192ecd3d0b87_ci2gqbtyr4sg4owock8k.mp4","ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXyntofIIQJJ6iHjaqdhdoEpIZoAjoAgUwuiLKVQaVtdC46u4PMOZiI67Lk63tM7eYG_hJG_dBl0PecpghFuTWGY"}
+
+
+2020-04-03 21:06:07.791: debug - response [45b6eab7-9287-4f6b-97c5-64002c207d8f::media.addFromUploadedFile] body:
+{"mediaType":1,"conversionQuality":11638381,"sourceType":"1","dataUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_hfes8xl6\/format\/url\/protocol\/https","plays":0,"views":0,"duration":0,"msDuration":0,"id":"1_hfes8xl6","name":"video.mp4","partnerId":2725931,"status":1,"moderationStatus":6,"moderationCount":0,"type":1,"createdAt":1585944367,"updatedAt":1585944367,"rank":0,"totalRank":0,"votes":0,"downloadUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_hfes8xl6\/format\/download\/protocol\/https\/flavorParamIds\/0","searchText":"_PAR_ONLY_ _2725931_ _MEDIA_TYPE_1|  video.mp4 ","licenseType":-1,"version":0,"thumbnailUrl":"https:\/\/cfvod.kaltura.com\/p\/2725931\/sp\/272593100\/thumbnail\/entry_id\/1_hfes8xl6\/version\/0","accessControlId":2965121,"replacementStatus":0,"partnerSortValue":0,"conversionProfileId":11638381,"rootEntryId":"1_hfes8xl6","operationAttributes":[],"entitledUsersEdit":"","entitledUsersPublish":"","entitledUsersView":"","capabilities":"","displayInSearch":1,"objectType":"KalturaMediaEntry"}
+

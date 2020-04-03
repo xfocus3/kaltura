@@ -30,6 +30,7 @@ import com.kaltura.client.utils.response.base.Response;
 import chunkedupload.ParallelUpload;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
 
 
 public class UploadTest { 
@@ -52,7 +53,7 @@ public class UploadTest {
 				MediaEntry newEntry = null;
 				boolean update = false;
 
-				final File file = new File(argv[0]);
+				final File file = new File("out/ko");
 			for(final File child : file.listFiles()) {
 				System.out.println("File Name"+child.getName());
 				if(child.isDirectory())
@@ -64,7 +65,38 @@ public class UploadTest {
 				entry.setType(EntryType.MEDIA_CLIP);
 				entry.setMediaType(MediaType.VIDEO);
 				System.out.println("\nCreating a new entry: " + entry.getId());
+				final File fileData = child;
 
+				final CountDownLatch doneSignal = new CountDownLatch(1);
+				MediaService.UploadMediaBuilder requestBuilder = MediaService.upload(fileData)
+						.setCompletion(new OnCompletion<Response<String>>() {
+
+							@Override
+							public void onComplete(Response<String> result) {
+
+								MediaEntry entry = new MediaEntry();
+								entry.setName(child.getName());
+								entry.setType(EntryType.MEDIA_CLIP);
+								entry.setMediaType(MediaType.VIDEO);
+
+								MediaService.AddFromUploadedFileMediaBuilder requestBuilder = MediaService.addFromUploadedFile(entry, result.results)
+										.setCompletion(new OnCompletion<Response<MediaEntry>>() {
+
+											@Override
+											public void onComplete(Response<MediaEntry> result) {
+												MediaEntry entry = result.results;
+
+												doneSignal.countDown();
+											}
+										});
+								APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+							}
+						});
+				APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+				doneSignal.await();
+
+				//				addTestImage(client,child,null);
+				/*
 				AddMediaBuilder requestBuilder = MediaService.add(entry)
 						.setCompletion(new OnCompletion<Response<MediaEntry>>() {
 							@Override
@@ -121,7 +153,7 @@ public class UploadTest {
 							}});
 				APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
 				System.out.println("finish " );
-
+*/
 
 			}
 
@@ -129,4 +161,66 @@ public class UploadTest {
         	exc.printStackTrace();
     	}
     }
+
+
+	public static void addTestImage(Client client, File file, final OnCompletion<MediaEntry> onCompletion)
+	{
+		MediaEntry entry = new MediaEntry();
+		entry.setName(file.getName());
+		entry.setMediaType(MediaType.IMAGE);
+
+		final File fileData;
+		final long fileSize;
+		fileData = file;
+		fileSize = fileData.length();
+
+		AddMediaBuilder requestBuilder = MediaService.add(entry)
+				.setCompletion(new OnCompletion<Response<MediaEntry>>() {
+
+					@Override
+					public void onComplete(Response<MediaEntry> result) {
+						final MediaEntry entry = result.results;
+
+						// Upload token
+						UploadToken uploadToken = new UploadToken();
+						uploadToken.setFileName(file.getName());
+						uploadToken.setFileSize((double) fileSize);
+						AddUploadTokenBuilder requestBuilder = UploadTokenService.add(uploadToken)
+								.setCompletion(new OnCompletion<Response<UploadToken>>() {
+
+									@Override
+									public void onComplete(Response<UploadToken> result) {
+										final UploadToken token = result.results;
+
+										// Define content
+										UploadedFileTokenResource resource = new UploadedFileTokenResource();
+										resource.setToken(token.getId());
+										AddContentMediaBuilder requestBuilder = MediaService.addContent(entry.getId(), resource)
+												.setCompletion(new OnCompletion<Response<MediaEntry>>() {
+
+													@Override
+													public void onComplete(Response<MediaEntry> result) {
+
+														// upload
+														UploadUploadTokenBuilder requestBuilder = UploadTokenService.upload(token.getId(), fileData, false)
+																.setCompletion(new OnCompletion<Response<UploadToken>>() {
+
+																	@Override
+																	public void onComplete(Response<UploadToken> result) {
+																		MediaService.get(entry.getId());
+																		onCompletion.onComplete(entry);
+																	}
+																});
+														APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+													}
+												});
+										APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+									}
+								});
+						APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+					}
+				});
+		APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
+	}
+
 }

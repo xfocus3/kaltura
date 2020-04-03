@@ -40,10 +40,13 @@ import com.kaltura.client.types.UploadToken;
 import com.kaltura.client.utils.response.OnCompletion;
 import com.kaltura.client.utils.response.base.Response;
 
+import javax.activation.MimetypesFileTypeMap;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,7 +144,9 @@ public class ParallelUpload {
 			        		log.info(String.format("%s: chunk %d pos %d size %d", threadName, i, seekPos, size));
 
 						stream.resetChunk(seekPos, size);
-						success = pu.addChunk(stream, true, (seekPos + size) == pu.fileSize, seekPos);
+						System.out.println("seekPos + \"  \" + size  = " + seekPos + "  " + size );
+						success = pu.addChunk(pu.file, stream, true, (seekPos + size) == pu.fileSize, seekPos);
+						System.out.println("success = " + success);
 						if (success)
 						{
 							pu.addUploadSize(size);
@@ -162,6 +167,7 @@ public class ParallelUpload {
 	private ILogger log = Logger.getLogger(getClass());
 
 	private String fileName;
+	private  File file;
 	private long fileSize;
 	private int nextChunk = 0;
 	private int chunkCount = 0;
@@ -209,6 +215,7 @@ public class ParallelUpload {
 	public String upload() throws InterruptedException, IOException, APIException
 	{
 		File fileData = new File(fileName);
+		file = fileData;
 		fileSize = fileData.length();
 
 		ChunkedStream stream;
@@ -232,7 +239,7 @@ public class ParallelUpload {
 
 						// add the first byte and then parallelize the actual upload
 						try {
-							addChunk(stream, false, false, 0);
+							addChunk(fileData,stream, false, false, 0);
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -275,11 +282,26 @@ public class ParallelUpload {
      * @param boolean finalChunk
      * @param long resumeAt
      *
-     * @return
+     * @param fileData
+	 * @return
      */
-    private boolean addChunk(ChunkedStream stream, boolean resume, boolean finalChunk, long resumeAt) throws IOException {
+    private boolean addChunk(File fileData, ChunkedStream stream, boolean resume, boolean finalChunk, long resumeAt) throws IOException {
 		// upload
-		UploadUploadTokenBuilder requestBuilder = UploadTokenService.upload(upToken.getId(), stream, "a.mkv", String.valueOf(stream.getSize()), resume, finalChunk, resumeAt);
+		MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+
+		String mimeType = mimeTypesMap.getContentType(fileData);
+		System.out.println("mimeType = " + mimeType);
+		System.out.println("stream.getSize() = " + stream.getSize());
+		System.out.println("upToken.getId() = " + upToken.getId());
+		UploadUploadTokenBuilder requestBuilder = UploadTokenService.upload(upToken.getId(), stream, mimeType,fileData.getName(), stream.getSize(), resume, finalChunk, resumeAt)
+				.setCompletion(new OnCompletion<Response<UploadToken>>() {
+
+					@Override
+					public void onComplete(Response<UploadToken> result) {
+						System.out.println("result.results = " + result.isSuccess());
+					}});
+
+						APIOkRequestsExecutor.getExecutor().queue(requestBuilder.build(client));
 		return true;
     }
 }
