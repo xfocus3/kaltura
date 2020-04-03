@@ -53,7 +53,7 @@ public class UploadTest {
 				MediaEntry newEntry = null;
 				boolean update = false;
 
-				final File file = new File("out/ko");
+				final File file = new File(argv[0]);
 			for(final File child : file.listFiles()) {
 				System.out.println("File Name"+child.getName());
 				if(child.isDirectory())
