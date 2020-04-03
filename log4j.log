@@ -1,0 +1,32 @@
+2020-04-03 17:22:29.854: debug - request [30ca3924-9c22-405a-9e48-d7ead4fadc03::media.add] url: https://www.kaltura.com/api_v3/service/media/action/add
+body:
+{"entry":{"objectType":"KalturaMediaEntry","name":"ko","type":"1","mediaType":1},"ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXxlHEqdwozO8brJlOzIVhY5l2EXBnDs0HpOmZ_cb1auRZVwSY0wZR1AlTBVcuQ9q_4AYeQ146LrUkL-oRx2Vfml"}
+
+
+2020-04-03 17:22:30.933: debug - response [30ca3924-9c22-405a-9e48-d7ead4fadc03::media.add] body:
+{"mediaType":1,"sourceType":"6","dataUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_ebo6nyug\/format\/url\/protocol\/https","plays":0,"views":0,"duration":0,"msDuration":0,"id":"1_ebo6nyug","name":"ko","partnerId":2725931,"status":7,"moderationStatus":6,"moderationCount":0,"type":1,"createdAt":1585930950,"updatedAt":1585930950,"rank":0,"totalRank":0,"votes":0,"downloadUrl":"https:\/\/cdnapisec.kaltura.com\/p\/2725931\/sp\/272593100\/playManifest\/entryId\/1_ebo6nyug\/format\/download\/protocol\/https\/flavorParamIds\/0","searchText":"_PAR_ONLY_ _2725931_ _MEDIA_TYPE_1|  ko ","licenseType":-1,"version":0,"thumbnailUrl":"https:\/\/cfvod.kaltura.com\/p\/2725931\/sp\/272593100\/thumbnail\/entry_id\/1_ebo6nyug\/version\/0","accessControlId":2965121,"replacementStatus":0,"partnerSortValue":0,"rootEntryId":"1_ebo6nyug","operationAttributes":[],"entitledUsersEdit":"","entitledUsersPublish":"","entitledUsersView":"","capabilities":"","displayInSearch":1,"objectType":"KalturaMediaEntry"}
+
+2020-04-03 17:22:30.979: debug - request [e112c9d5-0c4a-4e8f-aaa1-8ff4ba311b58::uploadtoken.add] url: https://www.kaltura.com/api_v3/service/uploadtoken/action/add
+body:
+{"uploadToken":{"objectType":"KalturaUploadToken","fileName":"/Users/xfocus/Downloads/kaltura/out/ko.mp4","fileSize":5.2594867E7},"ignoreNull":true,"format":1,"clientTag":"java:20-02-03","apiVersion":"15.16.0","ks":"djJ8MjcyNTkzMXxlHEqdwozO8brJlOzIVhY5l2EXBnDs0HpOmZ_cb1auRZVwSY0wZR1AlTBVcuQ9q_4AYeQ146LrUkL-oRx2Vfml"}
+
+
+2020-04-03 17:22:32.002: debug - response [e112c9d5-0c4a-4e8f-aaa1-8ff4ba311b58::uploadtoken.add] body:
+{"id":"1_01c437d6cf68fb019c3b8ea4bbf21013","partnerId":2725931,"status":0,"fileName":"\/Users\/xfocus\/Downloads\/kaltura\/out\/ko.mp4","fileSize":"52594867","createdAt":1585930951,"updatedAt":1585930951,"uploadUrl":"https:\/\/ny-upload.kaltura.com","autoFinalize":false,"objectType":"KalturaUploadToken"}
+
+2020-04-03 17:22:32.007: info  - Uploading token 1_01c437d6cf68fb019c3b8ea4bbf21013 file size 52594867 in 6 chunks
+
+2020-04-03 17:22:32.013: info  - Uploading token 1_01c437d6cf68fb019c3b8ea4bbf21013 file size 52594867 uploaded 0
+
+2020-04-03 17:22:32.023: info  - Thread-1: chunk 0 pos 0 size 10485760
+
+2020-04-03 17:22:32.024: info  - Thread-1: chunk 1 pos 10485760 size 10485760
+
+2020-04-03 17:22:32.024: info  - Thread-1: chunk 2 pos 20971520 size 10485760
+
+2020-04-03 17:22:32.024: info  - Thread-1: chunk 3 pos 31457280 size 10485760
+
+2020-04-03 17:22:32.024: info  - Thread-1: chunk 4 pos 41943040 size 10485760
+
+2020-04-03 17:22:32.025: info  - Thread-1: chunk 5 pos 52428800 size 166067
+
